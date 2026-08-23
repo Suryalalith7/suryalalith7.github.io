@@ -411,6 +411,62 @@ dialog#contact[open]{ animation:cardIn .34s cubic-bezier(.2,.7,.3,1); }
 
 :focus-visible{ outline:2px solid var(--gold); outline-offset:3px; border-radius:4px; }
 
+
+/* ============================================================ MOBILE ENHANCEMENTS */
+.miniflow{ display:none; }
+.mf-lbl{ font-family:var(--mono); font-weight:600; font-size:8.5px; letter-spacing:.18em; text-transform:uppercase; }
+.mf-num{ font-family:var(--mono); font-weight:400; font-size:7px; letter-spacing:.14em; }
+
+@media (max-width:700px){
+  /* the big network is invisible noise at this size — swap it for a full-strength strip */
+  .fibrefield{ display:none; }
+  .miniflow{ display:block; margin:1.6rem 0 .2rem; }
+  .miniflow svg{ display:block; width:100%; height:auto; }
+
+  .status{ font-size:.54rem; letter-spacing:.09em; padding:.32rem .7rem; }
+  .hero{ padding-top:1.6rem; }
+  h1{ margin-bottom:1rem; }
+
+  .hero-cta{ flex-direction:column; }
+  .hero-cta .btn{ width:100%; justify-content:center; padding:.8rem 1.15rem; }
+
+  /* signals become three quiet rows instead of a tower of display type */
+  .signals{ grid-template-columns:1fr; gap:.15rem; margin-top:1.4rem; padding-top:1.1rem; }
+  .signal{ display:flex; align-items:baseline; gap:.9rem; padding:.45rem 0;
+    border-bottom:1px solid var(--line-soft); }
+  .signal:last-child{ border-bottom:none; }
+  .signal b{ font-size:1.25rem; min-width:4.6rem; }
+  .signal span{ margin-top:0; font-size:.56rem; letter-spacing:.1em; line-height:1.5; }
+
+  .band{ padding:2.2rem 0; }
+  .sec-head{ margin-bottom:1.3rem; }
+  .sec-head p{ font-size:.9rem; }
+}
+
+/* the architecture becomes a vertical medallion timeline */
+@media (max-width:620px){
+  .stages{ position:relative; grid-template-columns:1fr; gap:0; padding-left:1.7rem; }
+  .stages::before{ content:""; position:absolute; left:5px; top:8px; bottom:8px; width:2px;
+    border-radius:2px; opacity:.55;
+    background:linear-gradient(180deg,var(--steel),var(--bronze) 32%,var(--silver) 56%,var(--gold) 80%,var(--gold-hi)); }
+  .stages::after{ content:""; position:absolute; left:2px; top:8px; width:8px; height:8px; border-radius:50%;
+    background:var(--gold-hi); box-shadow:0 0 10px var(--gold);
+    animation:railDown 6.5s linear infinite; }
+  @keyframes railDown{ from{ top:1%; opacity:0 } 6%{ opacity:1 } 92%{ opacity:1 } to{ top:97%; opacity:0 } }
+
+  .stage{ border-top:none; padding:0 0 1.5rem .2rem; }
+  .stage:last-child{ padding-bottom:.2rem; }
+  .stage::before{ /* the accent tab becomes the timeline node */
+    top:.32rem; left:-1.63rem; transform:none; width:10px; height:10px; border-radius:50%;
+    background:var(--void); border:1.5px solid var(--accent);
+    box-shadow:0 0 9px var(--accent); transition:none; }
+  .stage:hover::before, .stage:focus-within::before{ width:10px; }
+  .stage .tag{ margin-bottom:.35rem; }
+  .stage h3{ font-size:.98rem; }
+}
+
+@media (prefers-reduced-motion:reduce){ .stages::after{ animation:none; display:none; } }
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{ animation:none !important; transition:none !important; scroll-behavior:auto !important; }
   .reveal{ opacity:1; transform:none; }
@@ -609,6 +665,71 @@ dialog#contact[open]{ animation:cardIn .34s cubic-bezier(.2,.7,.3,1); }
       <a class="btn" href="#work">See the work</a>
     </div>
 
+
+    <div class="miniflow" aria-hidden="true">
+      <svg viewBox="0 0 390 118" xmlns="http://www.w3.org/2000/svg" role="presentation">
+        <defs>
+          <linearGradient id="mfMed" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="390" y2="0">
+            <stop offset="0.00" stop-color="#8B96A2" stop-opacity=".25"/>
+            <stop offset="0.18" stop-color="#8B96A2"/>
+            <stop offset="0.33" stop-color="#C77B3E"/>
+            <stop offset="0.54" stop-color="#C3D0DC"/>
+            <stop offset="0.75" stop-color="#E9B75A"/>
+            <stop offset="1.00" stop-color="#F7DA9B"/>
+          </linearGradient>
+          <filter id="mfGlow" x="-200%" y="-200%" width="500%" height="500%">
+            <feGaussianBlur stdDeviation="2.2" result="a"/>
+            <feGaussianBlur stdDeviation="6" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="a"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <path id="mfSpine" d="M10,52 H380"/>
+        </defs>
+        <use href="#mfSpine" fill="none" stroke="url(#mfMed)" stroke-width="5" opacity=".14" filter="url(#mfGlow)"/>
+        <g fill="none" stroke="url(#mfMed)" stroke-width="1" opacity=".5">
+          <path d="M10,24 C58,24 92,52 128,52"/>
+          <path d="M10,80 C58,80 92,52 128,52"/>
+          <path d="M292,52 C332,52 346,32 380,28"/>
+          <path d="M292,52 C332,52 346,72 380,76"/>
+        </g>
+        <use href="#mfSpine" fill="none" stroke="url(#mfMed)" stroke-width="1.3"/>
+
+        <g filter="url(#mfGlow)">
+          <circle cx="70"  cy="52" r="6.5" fill="none" stroke="#8B96A2" stroke-width="1"/><circle cx="70"  cy="52" r="2" fill="#D3DBE3"/>
+          <circle cx="128" cy="52" r="7"   fill="none" stroke="#C77B3E" stroke-width="1.1"/><circle cx="128" cy="52" r="2.2" fill="#F0B784"/>
+          <circle cx="210" cy="52" r="7"   fill="none" stroke="#C3D0DC" stroke-width="1.1"/><circle cx="210" cy="52" r="2.2" fill="#EEF4F9"/>
+          <circle cx="292" cy="52" r="10"  fill="none" stroke="#E9B75A" stroke-width="1.2"/><circle cx="292" cy="52" r="2.8" fill="#FFF0CB"/>
+          <circle cx="360" cy="52" r="6"   fill="none" stroke="#F7DA9B" stroke-width="1" opacity=".8"/><circle cx="360" cy="52" r="1.8" fill="#FFF6E2"/>
+        </g>
+        <circle cx="292" cy="52" r="17" fill="none" stroke="#E9B75A" stroke-width=".8" opacity=".3">
+          <animate attributeName="r" values="17;23;17" dur="4.6s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values=".3;.05;.3" dur="4.6s" repeatCount="indefinite"/>
+        </circle>
+
+        <g text-anchor="middle">
+          <text class="mf-num" x="70"  y="30" fill="#5C6672">01</text>
+          <text class="mf-num" x="128" y="30" fill="#7A5230">02</text>
+          <text class="mf-num" x="210" y="30" fill="#6E7A87">03</text>
+          <text class="mf-num" x="292" y="24" fill="#8A6C2E">04</text>
+          <text class="mf-lbl" x="70"  y="86" fill="#8B96A2">source</text>
+          <text class="mf-lbl" x="128" y="86" fill="#C77B3E">bronze</text>
+          <text class="mf-lbl" x="210" y="86" fill="#C3D0DC">silver</text>
+          <text class="mf-lbl" x="292" y="92" fill="#E9B75A">gold</text>
+        </g>
+
+        <g filter="url(#mfGlow)">
+          <circle r="2.4" fill="#8B96A2">
+            <animateMotion dur="5.6s" repeatCount="indefinite" calcMode="linear"><mpath href="#mfSpine"/></animateMotion>
+            <animate attributeName="fill" values="#8B96A2;#C77B3E;#C3D0DC;#E9B75A;#FFF6E2" dur="5.6s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;1;1;1;0" dur="5.6s" repeatCount="indefinite"/>
+          </circle>
+          <circle r="1.8" fill="#8B96A2">
+            <animateMotion dur="5.6s" repeatCount="indefinite" begin="-2.8s" calcMode="linear"><mpath href="#mfSpine"/></animateMotion>
+            <animate attributeName="fill" values="#8B96A2;#C77B3E;#C3D0DC;#E9B75A;#FFF6E2" dur="5.6s" repeatCount="indefinite" begin="-2.8s"/>
+            <animate attributeName="opacity" values="0;1;1;1;0" dur="5.6s" repeatCount="indefinite" begin="-2.8s"/>
+          </circle>
+        </g>
+      </svg>
+    </div>
     <div class="signals">
       <div class="signal"><b data-count="1284331" data-suffix="" data-format="compact">0</b><span>rows reconciled, source to target, every night</span></div>
       <div class="signal"><b data-count="90" data-suffix="+">0</b><span>API requests verified before a single load runs</span></div>
@@ -965,6 +1086,7 @@ dialog#contact[open]{ animation:cardIn .34s cubic-bezier(.2,.7,.3,1); }
         <a class="vrow" href="mailto:suryalalith7@gmail.com"><b>&#8594;</b><i>Email</i><span>suryalalith7@gmail.com</span></a>
         <a class="vrow" href="tel:+919704983142"><b>&#8594;</b><i>Phone</i><span>+91 97049 83142</span></a>
         <a class="vrow" href="https://linkedin.com/in/suryalalith" target="_blank" rel="noopener"><b>&#8594;</b><i>LinkedIn</i><span>/in/suryalalith</span></a>
+       
         <div class="vfoot">
           <button class="btn btn-solid" data-copy="suryalalith7@gmail.com">Copy email</button>
           <a class="btn" href="mailto:suryalalith7@gmail.com">Open mail app</a>
